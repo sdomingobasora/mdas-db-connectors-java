@@ -109,6 +109,39 @@ public class Main {
 
         // ---------------------------------
 
+        String fifthQuery = """
+            SELECT *
+            FROM customer
+            
+            INNER JOIN
+            (SELECT MAX(customer_id) AS customer_id, MAX(create_date) as added_to_store
+             FROM customer
+             GROUP BY store_id
+             ) AS added_customer
+             
+            ON customer.customer_id = added_customer.customer_id;
+            """;
+        st = con.createStatement();
+        rs = st.executeQuery(fifthQuery);
+
+        System.out.println("\nFifth query:");
+        while (rs.next()) {
+            System.out.println(
+                rs.getString("customer_id") + " | " +
+                rs.getString("store_id") + " | " +
+                rs.getString("first_name") + " | " +
+                rs.getString("last_name") + " | " +
+                rs.getString("email") + " | " +
+                rs.getString("address_id") + " | " +
+                rs.getString("active") + " | " +
+                rs.getString("create_date") + " | " +
+                rs.getString("last_update") + " | " +
+                rs.getString("added_to_store")
+            );
+        }
+
+        // ---------------------------------
+
         con.close();
     }
 }
