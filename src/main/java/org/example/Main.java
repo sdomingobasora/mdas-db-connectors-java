@@ -89,6 +89,26 @@ public class Main {
 
         // ---------------------------------
 
+        String email = "exercise@mdas.com";  // pretend we got this as input from user
+        String fourthQuery = """
+            UPDATE customer
+            SET email = ?
+            WHERE customer_id = ?;
+            """;
+        pst = con.prepareStatement(fourthQuery);
+        pst.setString(1, email);
+        pst.setInt(2, id);
+
+        System.out.println("\nFourth query:");
+        try {
+            pst.execute();
+            System.out.println("Updated row with id " + id);
+        } catch (Exception e) {
+            System.out.println("Cannot update row with id " + id);
+        }
+
+        // ---------------------------------
+
         con.close();
     }
 }
