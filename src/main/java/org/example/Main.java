@@ -81,12 +81,8 @@ public class Main {
 
         System.out.println("\nThird query:");
         try {
-            boolean b = pst.execute();
-            if (b) {
-                System.out.println("Updated row with id " + id);
-            } else {
-                System.out.println("Cannot update row with id " + id);
-            }
+            pst.execute();
+            System.out.println("Updated row with id " + id);
         } catch (Exception e) {
             System.out.println("Cannot update row with id " + id);
         }
